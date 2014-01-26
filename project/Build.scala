@@ -71,22 +71,24 @@ object AstracJvmBuild extends Build {
     )
   )
 
-  lazy val astracJvm = Project(id = "astrac-jvm", base = file(".")) aggregate(astracEtl)
+  lazy val astracJvm = Project(id = "astrac-jvm", base = file(".")) aggregate(util, astracEtl)
 
-  val gruntBuildTask = taskKey[Unit]("Builds a grunt project")
+//  val gruntBuildTask = taskKey[Unit]("Builds a grunt project")
+//
+//  val gruntSettings = gruntBuildTask := gruntBuild((classDirectory in astracEtl in Compile).value / "ui")
+//
+//  def gruntBuild(rootDir: File) = {
+//    val exitCode = Process("grunt" :: "build" :: Nil, rootDir) !
+//
+//    if (exitCode != 0) {
+//      sys.error(s"Cannot build grunt project in ${rootDir.absolutePath}")
+//    }
+//  }
+//
+//  val gruntCompileSettings = Seq(gruntSettings, compile <<= (compile in astracEtl in Compile) dependsOn gruntBuildTask)
 
-  val gruntSettings = gruntBuildTask := gruntBuild((classDirectory in astracEtl in Compile).value / "ui")
-
-  def gruntBuild(rootDir: File) = {
-    val exitCode = Process("grunt" :: "build" :: Nil, rootDir) !
-
-    if (exitCode != 0) {
-      sys.error(s"Cannot build grunt project in ${rootDir.absolutePath}")
-    }
-  }
-
-  val gruntCompileSettings = Seq(gruntSettings, compile <<= (compile in astracEtl in Compile) dependsOn gruntBuildTask)
+  lazy val util: Project = Project(id = "util", base = file("./util"), settings = baseSettings)
 
   lazy val astracEtl: Project =
-    Project(id = "etl", base = file("./etl"), settings = spraySettings)
+    Project(id = "etl", base = file("./etl"), settings = spraySettings) dependsOn(util)
 }

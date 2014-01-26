@@ -1,4 +1,4 @@
-package com.footfall.utils
+package com.astrac.util
 
 import scala.concurrent.{ExecutionContext, Promise, Future}
 import scala.util.{Failure, Success}
