@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="page-header">
+    <h1>ETL</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <h2>Running statistics</h2>
+    <ul class="list-group">
+      <li class="list-group-item"><span class="badge">{{stat.extracted}}</span>Extracted</li>
+      <li class="list-group-item"><span class="badge">{{stat.transformed}}</span>Transformed</li>
+      <li class="list-group-item"><span class="badge">{{stat.loaded}}</span>Loaded</li>
+        <li class="list-group-item"><span class="badge">{{stat.extractFailures}}</span>Extraction failures</li>
+      <li class="list-group-item"><span class="badge">{{stat.transformFailures}}</span>Transformation failures</li>
+      <li class="list-group-item"><span class="badge">{{stat.loadFailures}}</span>Loading failures</li>
+      <li class="list-group-item"><span class="badge">{{stat.unknownFailures}}</span>Unknown failures</li>
+      <li class="list-group-item"><span class="badge">{{stat.runtime | date:'HH:mm:ss'}}</span>Runtime</li>
+      <li class="list-group-item"><span class="badge">{{stat.totalRecords}}</span>Total records</li>
+      <li class="list-group-item"><span class="badge">{{stat.extimatedRemainingTime | date:'HH:mm:ss'}}</span>Estimated remaining time</li>
+    </ul>
+  </div>
+  <div class="col-md-8">
+    <div class="row">
+      <h2>Progress</h2>
+      <p class="progress-bar-label">Extracted:</p>
+      <div class="progress progress-striped active">
+        <div class="progress-bar progress-bar-success" role="progressbar" style="width: {{stat.percentageExtracted}};">
+          <span>{{stat.extracted}}/{{stat.totalRecords}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <p class="progress-bar-label">Transformed:</p>
+      <div class="progress progress-striped active">
+        <div class="progress-bar progress-bar-info" role="progressbar" style="width: {{stat.percentageTransformed}};">
+          <span>{{stat.transformed}}/{{stat.totalRecords}}</span>
+        </div>
+      </div>
+      <div class="row">
+    </div>
+      <p class="progress-bar-label">Loaded:</p>
+      <div class="progress progress-striped active">
+        <div class="progress-bar progress-bar-warning" role="progressbar" style="width: {{stat.percentageLoaded}};">
+          <span>{{stat.loaded}}/{{stat.totalRecords}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
